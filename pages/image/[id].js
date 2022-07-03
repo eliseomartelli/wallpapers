@@ -31,7 +31,7 @@ const Wallpaper = ({ data }) => (
       </div>
     </div>
     <div className='grid grid-cols-2 gap-4'>
-      {data.urls.map((e) => <Button {...e} />)}
+      {data.urls.map((e, i) => <Button {...e} key={i} />)}
     </div>
   </>
 )
