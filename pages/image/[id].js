@@ -1,8 +1,9 @@
 import Head from 'next/head'
-import Image from 'next/image';
 import Axios from "axios";
 
 import { useRouter } from 'next/router'
+
+import WallpaperCard from '../../components/WallpaperCard';
 
 const Home = (props) => {
   const router = useRouter();
@@ -14,30 +15,26 @@ const Home = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Wallpaper data={props.data} />
+      {!props.notFound ?
+        <Wallpaper data={props.data} />
+        : <>Not found</>
+      }
     </>
   )
 }
 
 const Wallpaper = ({ data }) => (
-  <>
-    <div className='flex flex-col w-full shadow-lg bg-white'>
-      <div className='relative w-full h-96'>
-        <Image src={data.preview} layout="fill" objectFit='cover' />
-      </div>
-      <div className='p-4'>
-        <h2 className='text-lg font-bold'>{data.title}</h2>
-        <p>{data.location}</p>
-      </div>
-    </div>
-    <div className='grid grid-cols-2 gap-4'>
+  <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+    <WallpaperCard {...data} />
+    <div className='grid grid-cols-2 sm:grid-cols-2 auto-rows-min gap-4'>
       {data.urls.map((e, i) => <Button {...e} key={i} />)}
     </div>
-  </>
+  </div>
 )
 
+
 const Button = ({ name, url }) => (
-  <a download href={url} className='bg-green-800 text-white p-4 rounded-sm shadow-sm hover:shadow-lg hover:bg-green-700'>Download {name}</a>
+  <a download href={url} className='bg-green-800 text-white p-4 rounded-sm shadow-sm hover:shadow-lg hover:bg-green-700 text-center'>Download {name}</a>
 )
 
 export default Home;
