@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import WallpaperCard from "../../components/WallpaperCard";
 import useSWR from "swr";
 import WallpaperCardShim from "../../components/WallpaperCardShim";
+import Error from "../../components/Error";
 
 const Home = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const Home = () => {
   const fetcher = async (url) => await Axios.get(url).then((res) => res.data);
   const { data, error } = useSWR(address, fetcher);
 
+  console.log(error);
   if (error)
     return (
       <>
@@ -21,7 +23,7 @@ const Home = () => {
           <title>Error | Eliseo Martelli</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <p>Error loading page. Try later.</p>
+        <Error message={error.response.data} />
       </>
     );
 
@@ -62,9 +64,21 @@ const Button = ({ name, url }) => (
   <a
     download
     href={url}
-    className="bg-slate-800 text-white p-4 rounded-lg shadow-md hover:shadow-lg hover:bg-slate-700 text-center"
+    className="bg-slate-800 text-white p-4 rounded-lg shadow-md hover:shadow-lg hover:bg-slate-700 flex gap-4"
   >
-    Download {name}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+        clipRule="evenodd"
+      />
+    </svg>
+    <span>Download {name}</span>
   </a>
 );
 

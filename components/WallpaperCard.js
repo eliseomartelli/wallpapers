@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const WallpaperCard = ({ preview, title, location }) => (
   <div className="flex flex-col w-full shadow-lg bg-white select-none rounded-lg overflow-hidden">
-    <div className="relative aspect-square">
+    <div className="relative aspect-square bg-gray-100">
       <Image src={preview} layout="fill" objectFit="cover" />
     </div>
     <div className="p-4">

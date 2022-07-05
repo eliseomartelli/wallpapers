@@ -4,6 +4,7 @@ import Link from "next/link";
 import Head from "next/head";
 import WallpaperCardShim from "../components/WallpaperCardShim";
 import useSWR from "swr";
+import Error from "../components/Error";
 
 const Index = () => {
   const address =
@@ -18,7 +19,7 @@ const Index = () => {
           <title>Error | Eliseo Martelli</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <p>Error loading page. Try later.</p>
+        <Error />
       </>
     );
 
@@ -56,7 +57,7 @@ const PostList = (props) => (
 
 const ShimPage = () => (
   <>
-    {new Array(5).fill(false).map((_, i) => (
+    {new Array(7).fill(false).map((_, i) => (
       <WallpaperCardShim key={i} />
     ))}
   </>
